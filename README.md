@@ -1,18 +1,49 @@
-# Find-It
-Find-It is an open-source web application designed to revolutionize the rental market by directly connecting tenants and landlords, eliminating the need for intermediaries. Our goal is to create a seamless, transparent platform where finding a house or a tenant is as simple as signing up.
+# FindIt: Solo Dev Project Blueprint (SRD)
 
-# Project Status: Agile Development
-We're currently in our first sprint, with a focused deadline of June 12, 2025. This project is open for collaboration, and we welcome contributions from anyone interested in helping us bridge the gap between tenants and landlords!
+## 1. Project Overview
 
-# Tech Stack
-Find-It is built using a modern and robust set of technologies to ensure scalability, performance, and a great user experience:
+* **Name:** FindIt
+* **Mission:** A lifestyle "Super-App" for NYSC, students, and job seekers to manage housing, income, and community needs.
+* **Modules:** Flat Rentals, Flatmate Finder, Item Marketplace, Pay-to-Stay, and Chore Board.
 
-Next.js: Powers both the frontend user interface and the backend API, enabling a highly efficient full-stack development process.
+## 2. Technical Stack (The "Solo-Friendly" Choice)
 
-Postman: Utilized for comprehensive API testing, ensuring all endpoints are functioning correctly and reliably.
+* **Frontend (Mobile):** React Native (with Expo for fast iterations).
+* **Frontend (Web):** Next.js (hosted on Vercel) for the Landing Page & Admin Dash.
+* **Backend:** Node.js (Express) on a Vercel/Render server.
+* **Database:** PostgreSQL (via Supabase — handles Auth & Storage out of the box).
+* **Payments:** Paystack (Webhooks for Escrow).
 
-Microsoft To Do and ClickUp: Our tool of choice for scheduling and tracking tasks, helping us manage project workflows and meet deadlines efficiently.
+---
 
-PostgreSQL: Serves as our primary relational database, providing robust and scalable data storage for all rental listings, user profiles, and transactions.
 
-Vercel Blob: Used for securely storing and managing files, images, and videos, ensuring quick access to multimedia content within the application.
+## 3. The "Trust & Verification" Strategy
+
+Since automated APIs cost money, we will use a **Hybrid Identity Flow**:
+
+1. **Tier 1 (Free):** Users verify their **Email/Phone** and link a **Bank Account** (using Paystack’s free "Resolve Account" API to confirm their real name).
+2. **Tier 2 (Manual):** Users upload a photo of their **NYSC/Student ID**. You approve these via your Next.js Admin Dashboard (Total cost: **₦0**).
+3. **Trust Score:** Every successful chore completion or rental stay adds `+10` points. Fraud/Reports deduct points.
+
+---
+
+## 5. Core User Flow (The Escrow Path)
+
+*This is the most complex logic you will code. Use this flow:*
+
+1. **Post:** User A posts a chore (₦2,000).
+2. **Commit:** User B accepts. User A "Funds" the chore via Paystack.
+3. **Hold:** Your backend receives the Paystack webhook and marks the Escrow record as `FUNDS_HELD`.
+4. **Complete:** User B finishes and clicks "Done." User A confirms.
+5. **Payout:** Your system triggers a **Paystack Transfer** to User B (minus a small platform fee).
+
+---
+
+## 5. Implementation Roadmap (Phase 1: The MVP)
+
+1. **Week 1-2:** Set up Supabase (Auth + DB) and build the **Marketplace UI**.
+2. **Week 3:** Integrate **Paystack** for simple item purchases.
+3. **Week 4:** Build the **Flatmate Profile** (lifestyle tags and filtering).
+4. **Week 5:** Launch "Alpha" to a small group of NYSC members for feedback.
+
+---
