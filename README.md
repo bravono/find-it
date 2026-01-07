@@ -63,3 +63,29 @@ Trust is our core product. For the **Chore** and **Stay** modules, we use a cust
 
 > 📖 **Want to contribute?** Please read our [CONTRIBUTING.md](./CONTRIBUTING.md) to get started with our Monorepo and development workflow.
 
+
+## 7. Database
+
+This project uses [Prisma](https://www.prisma.io/) with a shared database package located in `packages/database`.
+
+### Setup
+
+1.  **Generate the client**:
+    ```bash
+    pnpm db:generate
+    ```
+2.  **Push the schema**:
+    ```bash
+    pnpm db:push
+    ```
+    (This uses the configured SQLite `dev.db` by default).
+
+### Migration
+
+To create a new migration after changing `schema.prisma`:
+```bash
+cd packages/database
+npx prisma migrate dev --name <migration_name>
+```
+
+
